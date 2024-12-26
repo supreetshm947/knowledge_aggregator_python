@@ -8,7 +8,7 @@ LLM = GoogleGenerativeAI(model="gemini-1.5-flash-latest")
 GRAPH = get_graph(LLM)
 
 
-@app.get("/answer/{query}")
+@app.get("/answer")
 def process_query(query: str):
     state = GRAPH.invoke({"original_query": query})
     return state["output"]
