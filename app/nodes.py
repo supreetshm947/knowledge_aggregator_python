@@ -24,7 +24,7 @@ def rectify_query(llm, state: State)-> State:
 def parse_query(llm,  state: State) -> State:
     query_parsing_template = """
             You are an assistant specialized in breaking user queries into smaller, logical subqueries.
-            Decompose the following query into distinct, manageable subqueries:
+            Decompose the following query into distinct, manageable subqueries, but restrict to 4 sub-queries at most:
 
             User Query: "{query}"
 
@@ -72,7 +72,9 @@ def retrieve_content(llm, state: State) -> State:
             for search in search_results:
                 if "content" not in result:
                     if "content" not in result:
-                        result["content"] = extract_content(search["href"])
+                        content = extract_content(search["href"])
+                        if content:
+                            result["content"]=content
                     if result.get("content"):
                         print(f"result->{result.get("content")}")
                         out = llm.invoke(summarize_prompt.format(content=result["content"]))
