@@ -29,8 +29,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/knowledge-aggregator:latest
-            ${{ secrets.DOCKER_USERNAME }}/knowledge-aggregator:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/knowledge-aggregator-py:latest
+            ${{ secrets.DOCKER_USERNAME }}/knowledge-aggregator-py:${{ github.sha }}
 
       - name: Verify Docker image
         run: echo "Docker image pushed successfully!"
